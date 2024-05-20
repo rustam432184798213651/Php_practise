@@ -2,7 +2,8 @@
 <html>
     
     <head>
-        <link rel="stylesheet" href="task_2.css">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <?php
