@@ -68,6 +68,16 @@
             echo "</table>";
 
   
+            echo "Люди с наиболее длинным именем" . "<br/>";
+            echo "</table style=".$style.">";
+            echo "<table>";
+            echo "<tr><th>Name</th><th>Height</th></tr>";
+            foreach($people_with_longest_name as $name => $height) {
+                echo "<tr>";
+                echo "<td>" . $name . "</td>" . "<td>" . $height . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
         ?>
     </body>
 </html>
