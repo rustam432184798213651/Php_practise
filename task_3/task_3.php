@@ -1,5 +1,5 @@
 <?php
-
+# Вычисляет площадь пересечения двух прямоугольников
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $x_1 = filter_input(INPUT_POST, 'x_1', FILTER_VALIDATE_FLOAT);
     $y_1 = filter_input(INPUT_POST, 'y_1', FILTER_VALIDATE_FLOAT);

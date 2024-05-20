@@ -8,7 +8,7 @@
     <script>
         $(document).ready(function(){
             $('form').on('submit', function(event){
-                event.preventDefault(); // Prevent the form from submitting via the browser
+                event.preventDefault();
 
                 $.ajax({
                     url: 'task_3.php',
