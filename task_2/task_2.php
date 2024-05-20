@@ -57,7 +57,16 @@
                 echo "</tr>";
             }
             echo "</table>";
-            
+            echo "Люди с наиболее коротким именем" . "<br/>";
+            echo "<table style= ".$style.">";
+            echo "<tr><th>Name</th><th>Height</th></tr>";
+            foreach($people_with_shortest_name as $name => $height) {
+                echo "<tr>";
+                echo "<td>" . $name . "</td>" . "<td>" . $height . "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+
   
         ?>
     </body>
