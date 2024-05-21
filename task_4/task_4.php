@@ -19,8 +19,8 @@ function drawAngledRectangle($image, $x, $y, $width, $height, $angle, $color) {
     imagedestroy($rotatedImage);
 }
 
-$width = 180;
-$height = 260;
+$width = 800;
+$height = 800;
 $image = imagecreatetruecolor($width, $height);
 
 $skyColor = imagecolorallocate($image, 135, 206, 235); 
@@ -33,10 +33,6 @@ $green = imagecolorallocate($image, 0, 255, 0);
 $white = imagecolorallocate($image, 255, 255, 255);
 $gray = imagecolorallocate($image,  128, 128, 128);
 imagefilledrectangle($image, 0, 0, $width, $height, $white);
-
-$x = 0;
-$y = $height;
-draw_house($image, $x, $y, $gray, $brown, $black, 2);
 
 imagefilledrectangle($image, 0, 0, $width, $height, $skyColor);
 imagefilledellipse($image, 700, 100, 120, 120, $sunColor);
@@ -82,35 +78,26 @@ function draw_rectangle($image, $point1, $point2, $point3, $color) {
     imageline($image, $points[1][0], $points[1][1], $points[2][0], $points[2][1], $black); 
     imageline($image, $points[2][0], $points[2][1], $points[0][0], $points[0][1], $black);
 }
-// $x_coordinate_of_triangle = 600;
-// $offset_for_right_points = 200;
-// $point1 = array($x_coordinate_of_triangle + $offset_for_right_points, 300); 
-// $point2 = array($x_coordinate_of_triangle, 500); 
-// $point3 = array($x_coordinate_of_triangle + $offset_for_right_points, 500); 
-// draw_rectangle($image, $point1, $point2, $point3, $grassColor);
-// $im = $image;
+$x_coordinate_of_triangle = 600;
+$offset_for_right_points = 200;
+$point1 = array($x_coordinate_of_triangle + $offset_for_right_points, 300); 
+$point2 = array($x_coordinate_of_triangle, 500); 
+$point3 = array($x_coordinate_of_triangle + $offset_for_right_points, 500); 
+draw_rectangle($image, $point1, $point2, $point3, $grassColor);
+$im = $image;
 
-// Домик
-
-
-$point1_for_roof = array(210, 420);
-$point2_for_roof = array(300, 420);
-$point3_for_roof = array(250, 370);
-
-
-function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door, $scale)
-{
-    $width = 90;
-    $height = 80;
-    $y = $y - $height * $scale;
-    $point1_for_roof = array($x, $y);
-    $point2_for_roof = array($x + 90 * $scale, $y);
-    $point3_for_roof = array($x + 40 * $scale, $y - 50 * $scale);
-    imagefilledrectangle($image, $x, $y + $height * $scale, $x + $width * $scale, $y, $color_of_body);
-    imagefilledrectangle($image, $x + 40 * $scale, $y + 80 * $scale, $x + 70 * $scale, $y + 30 * $scale, $color_of_door);
-    draw_rectangle($image, $point1_for_roof, $point2_for_roof, $point3_for_roof, $color_of_roof);
-    imagejpeg($image, 'house.jpg');
-}
+// function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door, $scale)
+// {
+//     $width = 90;
+//     $height = 80;
+//     $y = $y - $height * $scale;
+//     $point1_for_roof = array($x, $y);
+//     $point2_for_roof = array($x + 90 * $scale, $y);
+//     $point3_for_roof = array($x + 40 * $scale, $y - 50 * $scale);
+//     imagefilledrectangle($image, $x, $y + $height * $scale, $x + $width * $scale, $y, $color_of_body);
+//     imagefilledrectangle($image, $x + 40 * $scale, $y + 80 * $scale, $x + 70 * $scale, $y + 30 * $scale, $color_of_door);
+//     draw_rectangle($image, $point1_for_roof, $point2_for_roof, $point3_for_roof, $color_of_roof);
+// }
 
 
 // imagefilledrectangle($image, 210, 500, 300, 420, $gray);
