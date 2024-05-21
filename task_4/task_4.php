@@ -41,43 +41,78 @@ $values = array(
             10,  10  
             );
 
-$white = imagecolorallocate($image, 255, 255, 255);
-$black = imagecolorallocate($image, 0, 0, 0);
-$yellow = imagecolorallocate($image, 255, 255, 0);
+function draw_rectangle($image, $point1, $point2, $point3, $color) {
+    // Треугольник
+    $white = imagecolorallocate($image, 255, 255, 255);
+    $black = imagecolorallocate($image, 0, 0, 0);
+    $yellow = imagecolorallocate($image, 255, 255, 0);
 
-$green = $grassColor;
+    $points = [$point1, $point2, $point3];
+    usort($points, function($a, $b) {
+        return $a[1] - $b[1];
+    });
+
+    for ($y = $points[0][1]; $y <= $points[1][1]; ++$y) {
+        $x1 = $points[0][0] + ($points[1][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[1][1] - $points[0][1]), 1);
+        $x2 = $points[0][0] + ($points[2][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[2][1] - $points[0][1]), 1);
+        if ($x1 > $x2) {
+            list($x1, $x2) = [$x2, $x1];
+        }
+        imageline($image, (int)$x1, $y, (int)$x2, $y, $color);
+    }
+
+    for ($y = $points[1][1]; $y <= $points[2][1]; ++$y) {
+        $x1 = $points[1][0] + ($points[2][0] - $points[1][0]) * ($y - $points[1][1]) / max(($points[2][1] - $points[1][1]), 1);
+        $x2 = $points[0][0] + ($points[2][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[2][1] - $points[0][1]), 1);
+        if ($x1 > $x2) {
+            list($x1, $x2) = [$x2, $x1];
+        }
+        imageline($image, (int)$x1, $y, (int)$x2, $y, $color);
+    }
+
+    imageline($image, $points[0][0], $points[0][1], $points[1][0], $points[1][1], $black); 
+    imageline($image, $points[1][0], $points[1][1], $points[2][0], $points[2][1], $black); 
+    imageline($image, $points[2][0], $points[2][1], $points[0][0], $points[0][1], $black);
+}
 $x_coordinate_of_triangle = 600;
 $offset_for_right_points = 200;
 $point1 = array($x_coordinate_of_triangle + $offset_for_right_points, 300); 
 $point2 = array($x_coordinate_of_triangle, 500); 
 $point3 = array($x_coordinate_of_triangle + $offset_for_right_points, 500); 
+draw_rectangle($image, $point1, $point2, $point3, $grassColor);
+$im = $image;
 
-$points = [$point1, $point2, $point3];
-usort($points, function($a, $b) {
-    return $a[1] - $b[1];
-});
+// Домик
+// Allocate colors
+$black = imagecolorallocate($image, 0, 0, 0);
+$brown = imagecolorallocate($image, 150,75,0);
+$green = imagecolorallocate($image, 0, 255, 0);
+$white = imagecolorallocate($image, 255, 255, 255);
+$gray = imagecolorallocate($image,  128, 128, 128);
 
-for ($y = $points[0][1]; $y <= $points[1][1]; ++$y) {
-    $x1 = $points[0][0] + ($points[1][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[1][1] - $points[0][1]), 1);
-    $x2 = $points[0][0] + ($points[2][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[2][1] - $points[0][1]), 1);
-    if ($x1 > $x2) {
-        list($x1, $x2) = [$x2, $x1];
-    }
-    imageline($image, (int)$x1, $y, (int)$x2, $y, $green);
+$point1_for_roof = array(210, 420);
+$point2_for_roof = array(300, 420);
+$point3_for_roof = array(250, 370);
+
+
+function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door)
+{
+    $width = 90;
+    $height = 80;
+    
+    $point1_for_roof = array($x, $y);
+    $point2_for_roof = array($x + 90, $y);
+    $point3_for_roof = array($x + 40, $y - 50);
+    imagefilledrectangle($image, $x, $y + $height, $x + $width, $y, $color_of_body);
+    imagefilledrectangle($image, $x + 40, $y + 80, $x + 70, $y + 30, $color_of_door);
+    draw_rectangle($image, $point1_for_roof, $point2_for_roof, $point3_for_roof, $color_of_roof);
 }
 
-for ($y = $points[1][1]; $y <= $points[2][1]; ++$y) {
-    $x1 = $points[1][0] + ($points[2][0] - $points[1][0]) * ($y - $points[1][1]) / max(($points[2][1] - $points[1][1]), 1);
-    $x2 = $points[0][0] + ($points[2][0] - $points[0][0]) * ($y - $points[0][1]) / max(($points[2][1] - $points[0][1]), 1);
-    if ($x1 > $x2) {
-        list($x1, $x2) = [$x2, $x1];
-    }
-    imageline($image, (int)$x1, $y, (int)$x2, $y, $green);
-}
-
-imageline($image, $points[0][0], $points[0][1], $points[1][0], $points[1][1], $black); 
-imageline($image, $points[1][0], $points[1][1], $points[2][0], $points[2][1], $black); 
-imageline($image, $points[2][0], $points[2][1], $points[0][0], $points[0][1], $black); 
+$x = 200;
+$y = 420;
+draw_house($image, $x, $y, $gray, $brown, $black);
+// imagefilledrectangle($image, 210, 500, 300, 420, $gray);
+// imagefilledrectangle($image, 250, 500, 280, 450, $black);
 
 header('Content-Type: image/png');
 imagepng($image);
