@@ -95,22 +95,22 @@ $point2_for_roof = array(300, 420);
 $point3_for_roof = array(250, 370);
 
 
-function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door)
+function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door, $scale)
 {
     $width = 90;
     $height = 80;
     
     $point1_for_roof = array($x, $y);
-    $point2_for_roof = array($x + 90, $y);
-    $point3_for_roof = array($x + 40, $y - 50);
-    imagefilledrectangle($image, $x, $y + $height, $x + $width, $y, $color_of_body);
-    imagefilledrectangle($image, $x + 40, $y + 80, $x + 70, $y + 30, $color_of_door);
+    $point2_for_roof = array($x + 90 * $scale, $y);
+    $point3_for_roof = array($x + 40 * $scale, $y - 50 * $scale);
+    imagefilledrectangle($image, $x, $y + $height * $scale, $x + $width * $scale, $y, $color_of_body);
+    imagefilledrectangle($image, $x + 40 * $scale, $y + 80 * $scale, $x + 70 * $scale, $y + 30 * $scale, $color_of_door);
     draw_rectangle($image, $point1_for_roof, $point2_for_roof, $point3_for_roof, $color_of_roof);
 }
 
 $x = 200;
 $y = 420;
-draw_house($image, $x, $y, $gray, $brown, $black);
+draw_house($image, $x, $y, $gray, $brown, $black, 2);
 // imagefilledrectangle($image, 210, 500, 300, 420, $gray);
 // imagefilledrectangle($image, 250, 500, 280, 450, $black);
 
