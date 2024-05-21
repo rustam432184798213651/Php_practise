@@ -59,33 +59,44 @@ function draw_rectangle($image, $point1, $point2, $point3, $color) {
     imageline($image, $points[1][0], $points[1][1], $points[2][0], $points[2][1], $black); 
     imageline($image, $points[2][0], $points[2][1], $points[0][0], $points[0][1], $black);
 }
-$x_coordinate_of_triangle = 600;
-$offset_for_right_points = 200;
-$point1 = array($x_coordinate_of_triangle + $offset_for_right_points, 300); 
-$point2 = array($x_coordinate_of_triangle, 500); 
-$point3 = array($x_coordinate_of_triangle + $offset_for_right_points, 500); 
-draw_rectangle($image, $point1, $point2, $point3, $grassColor);
-$im = $image;
 
-$originalImage = $image;
 
-// Load the object image (e.g., a rectangle)
-$objectImage = imagecreatefromjpeg('new_house.jpg');
 
-// Rotate the object image
-$angle = 45; // Rotation angle in degrees
-$rotatedObjectImage = imagerotate($objectImage, $angle, $skyColor);
+function insert_house($image, $positionX, $positionY, $scale, $angle,  $background_color)
+{
+    $originalImage = $image;
 
-// Get the dimensions of the rotated object image
-$objectWidth = imagesx($rotatedObjectImage);
-$objectHeight = imagesy($rotatedObjectImage);
+    // Load the object image (e.g., a rectangle)
+    $objectImage = imagecreatefromjpeg('new_house.jpg');
 
-// Calculate the position to place the rotated object image on the original image
-$positionX = 100; // X coordinate
-$positionY = 100; // Y coordinate
+    // Rotate the object image
+    $rotatedObjectImage = imagerotate($objectImage, $angle, $background_color);
 
-// Overlay the rotated object image onto the original image
-imagecopymerge($originalImage, $rotatedObjectImage, $positionX, $positionY, 0, 0, $objectWidth, $objectHeight, 100);
+    // Get the dimensions of the rotated object image
+    $objectWidth = (int)(imagesx($rotatedObjectImage) * $scale);
+    $objectHeight = (int)(imagesy($rotatedObjectImage) * $scale);
+    $rotatedObjectImage = imagescale($rotatedObjectImage, $objectWidth, $objectHeight);
+    // Calculate the position to place the rotated object image on the original image
+
+    // Overlay the rotated object image onto the original image
+    imagecopymerge($originalImage, $rotatedObjectImage, $positionX, $positionY, 0, 0, $objectWidth, $objectHeight, 100);
+}
+
+$file = fopen("house_info.txt", "r");
+while (!feof($file)) {
+    $line = fgets($file);
+    $parts = explode(" ", $line);
+    
+    if (count($parts) == 4) {
+        $x = floatval($parts[0]);
+        $y = floatval($parts[1]);
+        $scale = floatval($parts[2]);
+        $angle = floatval($parts[3]);
+        insert_house($image, $x, $y, $scale, $angle, $skyColor);
+    }
+}
+
+fclose($file);
 
 // function draw_house($image, $x, $y, $color_of_body, $color_of_roof, $color_of_door, $scale)
 // {
@@ -101,7 +112,12 @@ imagecopymerge($originalImage, $rotatedObjectImage, $positionX, $positionY, 0, 0
 //     imagejpeg($image, 'new_house.jpg');
 // }
 
-
+$x_coordinate_of_triangle = 600;
+$offset_for_right_points = 200;
+$point1 = array($x_coordinate_of_triangle + $offset_for_right_points, 300); 
+$point2 = array($x_coordinate_of_triangle, 500); 
+$point3 = array($x_coordinate_of_triangle + $offset_for_right_points, 500); 
+draw_rectangle($image, $point1, $point2, $point3, $grassColor);
 // imagefilledrectangle($image, 210, 500, 300, 420, $gray);
 // imagefilledrectangle($image, 250, 500, 280, 450, $black);
 
