@@ -8,9 +8,9 @@
     <body>
         <?php
             # Имена людей и их рост. 
-            $people["Stephanie"] = 160;
-            $people["Mike"] = 175;
-            $people["Ross"] = 180;
+            $people["Max"] = 160;
+            $people["Nikita"] = 175;
+            $people["Vika"] = 180;
             $people["Richard"] = 150;
             $people["John"] = 167;
             $people["Stuart"] = 170;
