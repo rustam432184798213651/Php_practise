@@ -19,7 +19,7 @@
         <input type="submit" value="Choose" name="Result"> 
     </form >
     <br>
-    <form class="UserInfoForm">
+    <form class="UserInfoForm" action="./test.php" method="post">
         <label for="City">Enter your city</label>
         <input type="text" name="City" required><br>
         <label for="Age">Enter your age</label>
