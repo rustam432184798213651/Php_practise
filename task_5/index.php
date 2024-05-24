@@ -5,20 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/index.css">
     </head>
-    <?php
-        $a = "";
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $choosen_color = filter_input(INPUT_POST, 'Color');
-            $a = " style=\"background-color:$choosen_color\"";
-        }
-        echo "<body" . $a . ">";  
-    ?>        
-    <form method="post" action=".">
-        <input type="radio" name="Color" value="red" checked>Red</br> 
-        <input type="radio" name="Color" value="yellow">Yellow</br>
-        <input type="submit" value="Choose" name="Result"> 
-    </form >
-    <br>
     <form class="UserInfoForm" action="./test.php" method="post">
         <label for="City">Enter your city</label>
         <input type="text" name="City" required><br>
