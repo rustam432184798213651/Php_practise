@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/index.css">
     </head>
     <?php
         $a = "";
@@ -13,11 +14,17 @@
         echo "<body" . $a . ">";  
     ?>        
     <form method="post" action=".">
-        <input type="radio" name="Color" value="red" checked>Red</br> <!--This one is automatically checked when the user opens the page-->
+        <input type="radio" name="Color" value="red" checked>Red</br> 
         <input type="radio" name="Color" value="yellow">Yellow</br>
-        
-
-        <input type="submit" value="Choose" name="Result"> <!--This button opens Result.php-->
+        <input type="submit" value="Choose" name="Result"> 
     </form >
+    <br>
+    <form class="UserInfoForm">
+        <label for="City">Enter your city</label>
+        <input type="text" name="City" required><br>
+        <label for="Age">Enter your age</label>
+        <input type="number" step="1" name="Age" required><br> 
+        <input type="submit" value="Send" name="UserData">
+    </form>
     </body>
 </html>
